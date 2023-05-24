@@ -1,0 +1,42 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <!-- Add your CSS styling -->
+</head>
+<body>
+  <h1>Admin Panel</h1>
+  <form id="login-form">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    // Attach event listener to login form submit button
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Get user input values
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Authenticate user using Firebase Auth
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Redirect to the admin panel or perform other actions
+          window.location.href = 'admin-panel.html';
+        })
+        .catch((error) => {
+          // Handle authentication error
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+</html>

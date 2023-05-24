@@ -34,9 +34,12 @@
     .login {
       display: flex;
       align-items: center;
+      justify-content: center;
+      margin-top: 20px;
     }
-    .login input[type="text"], .login input[type="password"] {
-      padding: 5px;
+    .login input[type="text"],
+    .login input[type="password"] {
+      padding: 10px;
       font-size: 1em;
       margin-right: 10px;
     }
@@ -57,13 +60,34 @@
     <a href="/shop">Shop</a>
     <a href="/app">App</a>
     <a href="/support">Support</a>
-    <div class="login">
-      <input type="text" placeholder="Username">
-      <input type="password" placeholder="Password">
-      <button>Login</button>
-    </div>
   </nav>
   <h1>Welcome to the Pirate Website!</h1>
   <p>Avast ye landlubbers! This be the most swashbuckling site on the high seas! Ye can find all sorts of pirate treasure here, from doubloons to grog to maps that lead to buried treasure. So hoist the Jolly Roger and set sail for adventure!</p>
+
+  <div class="login">
+    <input type="text" placeholder="Username" id="username">
+    <input type="password" placeholder="Password" id="password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-auth.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    function login() {
+      var email = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function(user) {
+          // Redirect to admin.html upon successful login
+          window.location.href = "admin.html";
+        })
+        .catch(function(error) {
+          // Handle login errors here
+          console.log(error);
+        });
+    }
+  </script>
 </body>
 </html>
